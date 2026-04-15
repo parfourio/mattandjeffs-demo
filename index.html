@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matt & Jeff's Car Wash & Detail | Marin County Since 1996</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #080a0e;
+      --dark:       #0f1218;
+      --dark-card:  #161c24;
+      --dark-border:#222c3a;
+      --blue:       #1a6fd4;
+      --blue-light: #3a8ff0;
+      --blue-dark:  #1255a8;
+      --blue-pale:  rgba(26,111,212,0.1);
+      --orange:     #f07820;
+      --orange-light:#f59040;
+      --white:      #f4f6fa;
+      --white-mid:  rgba(244,246,250,0.65);
+      --white-dim:  rgba(244,246,250,0.28);
+      --gd:         rgba(244,246,250,0.03);
+      --gl:         rgba(8,10,14,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+    .grid-dark { background-image: linear-gradient(var(--gd) 1px,transparent 1px),linear-gradient(90deg,var(--gd) 1px,transparent 1px); background-size: 72px 72px; }
+    .grid-light { background-color: #eef2f8; background-image: linear-gradient(var(--gl) 1px,transparent 1px),linear-gradient(90deg,var(--gl) 1px,transparent 1px); background-size: 72px 72px; }
+
+    /* BANNER */
+    .outreach-banner {
+      background: linear-gradient(90deg,#06080c,#0c1220,#06080c);
+      border-bottom: 2px solid var(--orange);
+      color: rgba(244,246,250,0.88);
+      padding: 10px 20px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap; font-size: 13px;
+      position: relative; z-index: 1000;
+    }
+    .outreach-banner a { display: inline-block; background: var(--orange); color: #fff; padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+    .outreach-banner a:hover { background: var(--orange-light); }
+
+    /* NAV */
+    .site-nav { position: sticky; top: 0; z-index: 900; background: rgba(8,10,14,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--dark-border); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; color: var(--white); text-decoration: none; line-height: 1; }
+    .nav-logo span { color: var(--blue-light); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--white-mid); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue-light); }
+    .nav-links .nav-cta a { background: var(--blue); color: #fff; padding: 8px 18px; border-radius: 4px; transition: background 0.2s; }
+    .nav-links .nav-cta a:hover { background: var(--blue-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 1px; transition: transform 0.3s,opacity 0.3s; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* HERO */
+    .hero { min-height: 100vh; position: relative; display: flex; align-items: flex-end; overflow: hidden; background: var(--black); }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: brightness(0.65) contrast(1.08); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(8,10,14,0.95) 28%, rgba(8,10,14,0.45) 60%, rgba(8,10,14,0.15) 100%),
+        linear-gradient(to top, rgba(8,10,14,1) 0%, transparent 45%);
+      z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--orange); }
+    .hero-eyebrow-text { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange); }
+    .hero-name-small { font-family: 'Bebas Neue', sans-serif; font-size: clamp(26px,3vw,40px); letter-spacing: 0.16em; color: var(--blue-light); display: block; margin-bottom: 8px; }
+    .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px,10vw,128px); line-height: 0.88; letter-spacing: 0.02em; color: var(--white); }
+    .hero-divider { width: 72px; height: 2px; background: linear-gradient(90deg, var(--orange), var(--blue)); margin: 20px 0; }
+    .hero-desc { font-size: 16px; color: var(--white-mid); max-width: 520px; line-height: 1.75; margin-bottom: 36px; font-weight: 300; }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-blue { display: inline-block; background: var(--blue); color: #fff; padding: 14px 32px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s,transform 0.15s; }
+    .btn-blue:hover { background: var(--blue-light); transform: translateY(-1px); }
+    .btn-orange { display: inline-block; background: var(--orange); color: #fff; padding: 14px 32px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s,transform 0.15s; }
+    .btn-orange:hover { background: var(--orange-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-block; border: 1px solid rgba(244,246,250,0.22); color: var(--white-mid); padding: 14px 32px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: border-color 0.2s,color 0.2s; }
+    .btn-ghost:hover { border-color: var(--blue-light); color: var(--blue-light); }
+
+    /* TICKER */
+    .ticker { background: var(--blue); overflow: hidden; padding: 10px 0; }
+    .ticker-track { display: flex; animation: ticker 30s linear infinite; width: max-content; }
+    .ticker-item { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0 28px; white-space: nowrap; }
+    .ticker-sep { color: rgba(255,255,255,0.35); padding: 0 8px; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* STATS — light */
+    .stats-section { border-bottom: 1px solid rgba(8,10,14,0.12); }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(5,1fr); }
+    .stat-item { padding: 36px 16px; text-align: center; border-right: 1px solid rgba(8,10,14,0.1); position: relative; }
+    .stat-item:last-child { border-right: none; }
+    .stat-item::after { content:''; position:absolute; bottom:0; left:20%; right:20%; height:2px; background:var(--blue); opacity:0.35; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--blue-dark); line-height: 1; margin-bottom: 6px; letter-spacing: 0.02em; }
+    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(8,10,14,0.4); }
+
+    /* SHARED */
+    section { scroll-margin-top: 64px; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .eyebrow-line { width: 28px; height: 1px; background: var(--blue); }
+    .eyebrow-text { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-light); }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5.5vw,72px); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-top: 8px; }
+    .section-title span { color: var(--orange); }
+    .body-text { font-size: 15px; color: var(--white-mid); line-height: 1.8; margin-bottom: 16px; font-weight: 300; }
+
+    /* STORY — dark grid */
+    .story-section { padding: 100px 24px; }
+    .story-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .story-img { width: 100%; height: 520px; object-fit: cover; border-radius: 4px; display: block; }
+    .story-img-wrap { position: relative; }
+    .story-img-wrap::after { content:''; position:absolute; bottom:-12px; right:-12px; width:55%; height:55%; border:2px solid var(--orange); border-radius:4px; z-index:-1; opacity:0.4; }
+    .story-quote { border-left: 3px solid var(--orange); padding: 18px 22px; background: var(--dark-card); border-radius: 0 4px 4px 0; margin: 24px 0; }
+    .story-quote p { font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; color: var(--white); line-height: 1.6; }
+
+    /* SERVICES — light grid */
+    .services-section { padding: 100px 24px; }
+    .services-inner { max-width: 1200px; margin: 0 auto; }
+    .services-header { text-align: center; margin-bottom: 56px; }
+    .services-title-light { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5.5vw,72px); line-height: 0.92; letter-spacing: 0.02em; color: rgba(8,10,14,0.88); margin-top: 8px; }
+    .services-title-light span { color: var(--blue-dark); }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .service-card { background: #fff; border: 1px solid rgba(8,10,14,0.1); border-radius: 8px; padding: 36px 28px; position: relative; overflow: hidden; transition: box-shadow 0.25s,transform 0.25s; box-shadow: 0 2px 12px rgba(8,10,14,0.06); }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(8,10,14,0.12); transform: translateY(-3px); }
+    .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--blue-light)); border-radius:8px 8px 0 0; }
+    .service-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+    .service-tag { font-size: 9px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; display: block; }
+    .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: rgba(8,10,14,0.88); letter-spacing: 0.04em; margin-bottom: 10px; line-height: 1; }
+    .service-desc { font-size: 13px; color: rgba(8,10,14,0.6); line-height: 1.65; margin-bottom: 18px; }
+    .service-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; padding: 9px 18px; border-radius: 4px; text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s; }
+    .service-cta:hover { background: var(--blue-light); }
+
+    /* PHOTO DIVIDER */
+    .photo-divider { height: 52vh; min-height: 340px; position: relative; overflow: hidden; }
+    .photo-divider img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: brightness(0.72) contrast(1.05); }
+    .photo-divider-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom,rgba(8,10,14,0.5) 0%,rgba(8,10,14,0.08) 40%,rgba(8,10,14,0.08) 60%,rgba(8,10,14,0.65) 100%); display: flex; align-items: center; justify-content: center; }
+    .photo-divider-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,8vw,100px); color: #fff; text-align: center; line-height: 0.95; letter-spacing: 0.06em; text-shadow: 0 4px 40px rgba(0,0,0,0.6); }
+    .photo-divider-text span { color: var(--orange); display: block; }
+
+    /* GAS BAND — orange */
+    .gas-band { background: var(--orange); padding: 72px 24px; position: relative; overflow: hidden; }
+    .gas-band::before { content:'GAS'; position:absolute; top:-40px; right:-30px; font-family:'Bebas Neue',sans-serif; font-size:300px; color:rgba(255,255,255,0.06); line-height:1; pointer-events:none; letter-spacing:0.04em; }
+    .gas-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+    .gas-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px,8vw,100px); color: #fff; line-height: 0.86; letter-spacing: 0.01em; margin-bottom: 12px; }
+    .gas-left p { font-size: 16px; color: rgba(255,255,255,0.82); line-height: 1.7; margin-bottom: 28px; font-weight: 300; }
+    .btn-dark { display: inline-block; background: rgba(8,10,14,0.85); color: #fff; padding: 14px 32px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s; }
+    .btn-dark:hover { background: rgba(8,10,14,1); }
+    .gas-perks { display: flex; flex-direction: column; gap: 14px; }
+    .gas-perk { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.9); }
+    .gas-perk-check { width: 26px; height: 26px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+
+    /* COMMUNITY — dark grid */
+    .community-section { padding: 100px 24px; }
+    .community-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .community-right h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5.5vw,70px); color: var(--white); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 20px; }
+    .community-right h2 span { color: var(--orange); }
+    .community-img { width: 100%; height: 480px; object-fit: cover; border-radius: 4px; display: block; }
+    .community-stat-big { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--orange); line-height: 1; letter-spacing: 0.02em; margin: 20px 0 8px; }
+    .community-stat-label { font-size: 14px; font-weight: 700; color: var(--white-mid); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+    .community-cards { display: flex; flex-direction: column; gap: 12px; }
+    .community-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-left: 3px solid var(--orange); border-radius: 0 4px 4px 0; padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
+    .community-card-icon { font-size: 20px; flex-shrink: 0; }
+    .community-card-text strong { font-size: 13px; font-weight: 700; color: var(--white); display: block; margin-bottom: 2px; }
+    .community-card-text span { font-size: 12px; color: var(--white-mid); line-height: 1.5; }
+
+    /* CLUB — light grid */
+    .club-section { padding: 100px 24px; }
+    .club-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .club-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5.5vw,70px); color: rgba(8,10,14,0.88); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 16px; }
+    .club-left h2 span { color: var(--blue-dark); }
+    .club-left p { font-size: 15px; color: rgba(8,10,14,0.62); line-height: 1.8; margin-bottom: 28px; font-weight: 400; }
+    .club-card { background: var(--blue); border-radius: 8px; padding: 36px; position: relative; overflow: hidden; }
+    .club-card::before { content:'CLUB'; position:absolute; top:-20px; right:-10px; font-family:'Bebas Neue',sans-serif; font-size:120px; color:rgba(255,255,255,0.07); line-height:1; pointer-events:none; }
+    .club-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #fff; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .club-card-sub { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .club-perks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .club-perk { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.88); }
+    .club-perk-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; flex-shrink: 0; }
+    .btn-white { display: inline-block; background: #fff; color: var(--blue-dark); padding: 12px 28px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: opacity 0.2s; }
+    .btn-white:hover { opacity: 0.9; }
+
+    /* LOCATIONS — dark grid */
+    .locations-section { padding: 80px 24px; }
+    .locations-inner { max-width: 1200px; margin: 0 auto; }
+    .locations-header { text-align: center; margin-bottom: 48px; }
+    .locations-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .location-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 8px; padding: 36px; position: relative; overflow: hidden; transition: border-color 0.25s; }
+    .location-card:hover { border-color: rgba(26,111,212,0.4); }
+    .location-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--blue-light)); border-radius:8px 8px 0 0; }
+    .location-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 0.06em; margin-bottom: 6px; }
+    .location-hours-badge { display: inline-block; background: var(--blue-pale); border: 1px solid rgba(26,111,212,0.3); color: var(--blue-light); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 20px; }
+    .location-details { display: flex; flex-direction: column; gap: 12px; }
+    .location-detail { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--white-mid); }
+    .location-detail-icon { color: var(--blue-light); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* CONTACT — dark */
+    .contact-section { padding: 80px 24px; border-top: 1px solid var(--dark-border); }
+    .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+    .contact-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px,5vw,64px); color: var(--white); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 16px; }
+    .contact-left h2 span { color: var(--blue-light); }
+    .contact-left p { font-size: 15px; color: var(--white-mid); line-height: 1.8; margin-bottom: 28px; font-weight: 300; }
+    .contact-info { display: flex; flex-direction: column; gap: 14px; }
+    .contact-info-item { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--white-mid); }
+    .contact-info-item a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .contact-info-item a:hover { color: var(--blue-light); }
+    .contact-icon { color: var(--blue-light); font-size: 18px; flex-shrink: 0; }
+    .contact-form { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 8px; padding: 36px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 8px; }
+    .form-group input,.form-group textarea,.form-group select { width: 100%; background: var(--dark); border: 1px solid var(--dark-border); border-radius: 4px; padding: 11px 14px; font-size: 14px; color: var(--white); font-family: 'Inter',sans-serif; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus,.form-group textarea:focus { border-color: rgba(26,111,212,0.5); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group select option { background: var(--dark); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-submit { width: 100%; background: var(--blue); color: #fff; border: none; padding: 13px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; cursor: pointer; font-family: 'Inter',sans-serif; transition: background 0.2s; }
+    .form-submit:hover { background: var(--blue-light); }
+
+    /* FOOTER */
+    footer { background: var(--black); border-top: 2px solid var(--blue); padding: 48px 24px 24px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 28px; border-bottom: 1px solid var(--dark-border); margin-bottom: 20px; }
+    .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--white); letter-spacing: 0.08em; margin-bottom: 6px; }
+    .footer-brand span { color: var(--blue-light); }
+    .footer-tagline { font-size: 11px; color: var(--white-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .footer-col h5 { font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: 13px; color: var(--white-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .footer-copy { font-size: 11px; color: var(--white-dim); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .story-inner,.community-inner,.club-inner,.contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .gas-inner { grid-template-columns: 1fr; gap: 40px; }
+      .locations-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(3,1fr); }
+      .stat-item:nth-child(4), .stat-item:nth-child(5) { border-top: 1px solid rgba(8,10,14,0.1); }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--dark); border-top: 1px solid var(--dark-border); flex-direction: column; padding: 16px 20px; gap: 0; box-shadow: 0 12px 32px rgba(0,0,0,0.7); }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid var(--dark-border); font-size: 13px; }
+      .nav-links .nav-cta a { border: none; background: none; color: var(--blue-light); }
+      .hero { min-height: 92vh; }
+      .hero-content { padding: 0 20px 56px; }
+      .hero-name { font-size: clamp(56px,15vw,96px); }
+      .hero-ctas { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .story-section,.services-section,.community-section,.club-section,.locations-section,.contact-section { padding: 60px 20px; }
+      .gas-band { padding: 60px 20px; }
+      .gas-left h2 { font-size: clamp(52px,15vw,90px); }
+      .services-grid { grid-template-columns: 1fr; }
+      .photo-divider { height: 40vh; min-height: 260px; }
+      .photo-divider-text { font-size: clamp(40px,12vw,68px); }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(8,10,14,0.1); }
+      .stat-item:nth-child(odd) { border-right: 1px solid rgba(8,10,14,0.1) !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER -->
+  <div class="outreach-banner">
+    <span>Matt &amp; Jeff — I put this together for you. If you like it it's yours, no strings attached. Let me know what you think.</span>
+    <a href="mailto:scott.michael.schultz@gmail.com">Reply to Scott →</a>
+  </div>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="top">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo">Matt &amp; <span>Jeff's</span></a>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gas">Gas</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li class="nav-cta"><a href="tel:4158999952">Call Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <img class="hero-photo" src="https://images.squarespace-cdn.com/content/v1/63d9a0499033a64522b18363/e458ee6f-c9f1-4464-89fa-b01d66a6360c/DSCF2110.JPG" alt="Matt and Jeff's team" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span class="hero-eyebrow-text">Novato &amp; San Rafael · Marin County · Since 1996</span></div>
+      <span class="hero-name-small">Matt &amp; Jeff's.</span>
+      <div class="hero-name">Marin's<br>Car Wash.</div>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Two lifelong friends. Two Marin locations. 29 years of caring for every car that comes through the door — and every community they serve. More than just a car wash.</p>
+      <div class="hero-ctas">
+        <a href="#services" class="btn-blue">Wash Services</a>
+        <a href="#club" class="btn-orange">Join the Club</a>
+        <a href="#gas" class="btn-ghost">⛽ Gas · 24 Hours</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Serving Marin Since 1996</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Novato &amp; San Rafael</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Car Wash · Detailing · Gas</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Unlimited Wash Club</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">$275,000+ Donated to Novato Schools</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Gas Open 24 Hours · Save 30¢/Gallon</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Serving Marin Since 1996</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Novato &amp; San Rafael</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Car Wash · Detailing · Gas</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Unlimited Wash Club</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">$275,000+ Donated to Novato Schools</span><span class="ticker-sep">✦</span>
+      <span class="ticker-item">Gas Open 24 Hours · Save 30¢/Gallon</span><span class="ticker-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- STATS — light -->
+  <div class="stats-section grid-light">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">1996</div><div class="stat-label">Est. · Marin County</div></div>
+      <div class="stat-item"><div class="stat-num">29</div><div class="stat-label">Years in Business</div></div>
+      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Marin Locations</div></div>
+      <div class="stat-item"><div class="stat-num">$275K</div><div class="stat-label">Donated to Schools</div></div>
+      <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Gas Station</div></div>
+    </div>
+  </div>
+
+  <!-- STORY — dark grid -->
+  <section class="story-section grid-dark" id="about">
+    <div class="story-inner">
+      <div class="story-img-wrap">
+        <img class="story-img" src="https://images.squarespace-cdn.com/content/v1/63d9a0499033a64522b18363/229151f3-61b9-4b7b-a4ad-b9d3616deefc/DSCF2113.JPG" alt="Matt and Jeff's Car Wash" />
+      </div>
+      <div>
+        <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Our Story</span></div>
+        <h2 class="section-title">Lifelong Friends.<br>Lifelong <span>Business.</span></h2>
+        <p class="body-text">Matt and Jeff have been friends since they were kids — literally neighbors who shared a fence growing up in Marin. When you count the lemonade stands and dog walking jobs they ran together starting at age 7, they've been in business together for over 50 years.</p>
+        <div class="story-quote">
+          <p>"In 1996 along came the opportunity to make a name for ourselves. From the first day, we were determined to make it a success."</p>
+        </div>
+        <p class="body-text">For 29 years, it has been a rare day that one of them hasn't been on the premises making sure every customer and every car gets the care it deserves. That's the Matt &amp; Jeff's difference — ownership that shows up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES — light grid -->
+  <section class="services-section grid-light" id="services">
+    <div class="services-inner">
+      <div class="services-header">
+        <div class="eyebrow" style="justify-content:center"><div class="eyebrow-line" style="background:var(--blue-dark)"></div><span class="eyebrow-text" style="color:var(--blue-dark)">What We Offer</span><div class="eyebrow-line" style="background:var(--blue-dark)"></div></div>
+        <h2 class="services-title-light">More Than<br>Just a <span>Car Wash.</span></h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">🚗</span>
+          <span class="service-tag">Full Service</span>
+          <div class="service-name">Wash Services</div>
+          <p class="service-desc">Your vehicle is pampered through our full wash process — gentle soap and conditioners, professional vacuuming, window cleaning inside and out, and a thorough interior wipe-down. Done quickly, done right.</p>
+          <a href="https://www.mattandjeffs.com/wash-services" target="_blank" class="service-cta">View Packages →</a>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">✨</span>
+          <span class="service-tag">Premium Detail</span>
+          <div class="service-name">Detailing Services</div>
+          <p class="service-desc">State-of-the-art steam cleaning machines. No harsh chemicals. We eliminate odors from smoke, mildew, and pets — and restore that fresh, new-car feeling. Inside and out.</p>
+          <a href="https://www.mattandjeffs.com/detailing-services" target="_blank" class="service-cta">Learn More →</a>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">⛽</span>
+          <span class="service-tag">24 Hours</span>
+          <div class="service-name">Gas Station</div>
+          <p class="service-desc">Open 24 hours a day. Save 30¢/gallon with any car wash purchase, or get a free gas discount card that saves you 40¢/gallon every day from 6pm–8am — no wash purchase needed.</p>
+          <a href="#gas" class="service-cta">Gas Discounts →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO DIVIDER -->
+  <div class="photo-divider">
+    <img src="https://images.squarespace-cdn.com/content/v1/63d9a0499033a64522b18363/74880841-12e8-48c4-bf18-6f7ad5e4941b/DSCF2119.JPG" alt="Matt and Jeff's detailing" />
+    <div class="photo-divider-overlay">
+      <div class="photo-divider-text">
+        Pride is in<br><span>the Work.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAS BAND — orange -->
+  <section class="gas-band" id="gas">
+    <div class="gas-inner">
+      <div class="gas-left">
+        <h2>Save at<br>the Pump.</h2>
+        <p>Our gas pumps are open 24 hours a day. Get a free discount card and save every time you fill up — no wash purchase required once you have the card.</p>
+        <a href="tel:4158999952" class="btn-dark">Get Your Discount Card</a>
+      </div>
+      <div class="gas-perks">
+        <div class="gas-perk"><div class="gas-perk-check">⛽</div>Save 30¢/gallon with any car wash purchase</div>
+        <div class="gas-perk"><div class="gas-perk-check">🌙</div>Save 40¢/gallon every day 6pm–8am (discount card)</div>
+        <div class="gas-perk"><div class="gas-perk-check">🕐</div>Gas pumps open 24 hours a day</div>
+        <div class="gas-perk"><div class="gas-perk-check">🎓</div>Every gallon you buy helps Novato Schools</div>
+        <div class="gas-perk"><div class="gas-perk-check">🆓</div>Discount card is free — just ask at the wash</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY — dark grid -->
+  <section class="community-section grid-dark" id="community">
+    <div class="community-inner">
+      <div class="community-right">
+        <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Community</span></div>
+        <h2>Giving Back<br>to <span>Marin.</span></h2>
+        <p class="body-text">Matt and Jeff's has been part of the Marin community their entire lives — and they give back to prove it. Through the School Fuel program, they donate 1¢ for every gallon of gas purchased to Novato Public Schools.</p>
+        <div class="community-stat-big">$275K+</div>
+        <div class="community-stat-label">Donated to Novato Public Schools to date</div>
+        <div class="community-cards">
+          <div class="community-card"><div class="community-card-icon">🏫</div><div class="community-card-text"><strong>School Fuel Program</strong><span>1¢ per gallon goes directly to Novato Public Schools — every time, automatically.</span></div></div>
+          <div class="community-card"><div class="community-card-icon">🤝</div><div class="community-card-text"><strong>Fundraising Partner</strong><span>Organizations and schools can partner with Matt &amp; Jeff's for fundraising programs that benefit their causes.</span></div></div>
+          <div class="community-card"><div class="community-card-icon">🎁</div><div class="community-card-text"><strong>Gift Shop &amp; Online Store</strong><span>Give the gift of a clean car — gift cards, merchandise, and more available online and in-store.</span></div></div>
+        </div>
+      </div>
+      <img class="community-img" src="https://images.squarespace-cdn.com/content/v1/63d9a0499033a64522b18363/697ca9bb-acae-4f34-ab3e-9e65771a7e40/download-3.jpg" alt="Matt and Jeff's community" />
+    </div>
+  </section>
+
+  <!-- CLUB — light grid -->
+  <section class="club-section grid-light" id="club">
+    <div class="club-inner">
+      <div class="club-left">
+        <div class="eyebrow"><div class="eyebrow-line" style="background:var(--blue-dark)"></div><span class="eyebrow-text" style="color:var(--blue-dark)">Membership</span></div>
+        <h2>Unlimited<br>Wash <span>Club.</span></h2>
+        <p>The smartest way to keep your car clean all year long. One low monthly price, unlimited washes — at both Marin locations. Our rates can't be beaten anywhere.</p>
+        <a href="https://www.mattandjeffs.com/wash-services" target="_blank" class="btn-blue" style="display:inline-block">Manage Your Club Plan</a>
+      </div>
+      <div class="club-card">
+        <h3>Unlimited Wash Club</h3>
+        <div class="club-card-sub">Monthly Membership · Both Locations</div>
+        <div class="club-perks">
+          <div class="club-perk"><div class="club-perk-dot"></div>Unlimited washes every month</div>
+          <div class="club-perk"><div class="club-perk-dot"></div>Valid at both Novato &amp; San Rafael</div>
+          <div class="club-perk"><div class="club-perk-dot"></div>One low monthly rate — no limits</div>
+          <div class="club-perk"><div class="club-perk-dot"></div>Easy management online</div>
+          <div class="club-perk"><div class="club-perk-dot"></div>Cancel anytime</div>
+        </div>
+        <a href="https://www.mattandjeffs.com/wash-services" target="_blank" class="btn-white">Join the Club</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS — dark grid -->
+  <section class="locations-section grid-dark" id="locations">
+    <div class="locations-inner">
+      <div class="locations-header">
+        <div class="eyebrow" style="justify-content:center"><div class="eyebrow-line"></div><span class="eyebrow-text">Find Us</span><div class="eyebrow-line"></div></div>
+        <h2 class="section-title" style="text-align:center">Two <span>Marin</span> Locations.</h2>
+      </div>
+      <div class="locations-grid">
+        <div class="location-card">
+          <div class="location-name">Novato</div>
+          <div class="location-hours-badge">Open Daily</div>
+          <div class="location-details">
+            <div class="location-detail"><span class="location-detail-icon">📍</span><span>125 Vintage Way<br>Novato, CA 94945</span></div>
+            <div class="location-detail"><span class="location-detail-icon">🕐</span><span>Car Wash: 8:30 AM – 5:30 PM daily<br>Gas: Open 24 Hours</span></div>
+            <div class="location-detail"><span class="location-detail-icon">📞</span><span><a href="tel:4158999952" style="color:inherit;">(415) 899-9952</a></span></div>
+          </div>
+          <div style="margin-top:24px"><a href="https://maps.google.com/?q=125+Vintage+Way+Novato+CA" target="_blank" class="service-cta" style="background:var(--blue);color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Get Directions →</a></div>
+        </div>
+        <div class="location-card">
+          <div class="location-name">San Rafael</div>
+          <div class="location-hours-badge">Open Daily</div>
+          <div class="location-details">
+            <div class="location-detail"><span class="location-detail-icon">📍</span><span>1515 2nd Street<br>San Rafael, CA 94901</span></div>
+            <div class="location-detail"><span class="location-detail-icon">🕐</span><span>Car Wash: 8:00 AM – 5:30 PM daily<br>Gas: Open 24 Hours</span></div>
+            <div class="location-detail"><span class="location-detail-icon">📞</span><span><a href="tel:4158999952" style="color:inherit;">(415) 899-9952</a></span></div>
+          </div>
+          <div style="margin-top:24px"><a href="https://maps.google.com/?q=1515+2nd+Street+San+Rafael+CA" target="_blank" class="service-cta" style="background:var(--blue);color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Get Directions →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Get in Touch</span></div>
+        <h2>Come See<br><span>Us Today.</span></h2>
+        <p>Questions about services, memberships, fundraising partnerships, or fleet accounts? We'd love to hear from you.</p>
+        <div class="contact-info">
+          <div class="contact-info-item"><span class="contact-icon">📞</span><span><a href="tel:4158999952">(415) 899-9952</a></span></div>
+          <div class="contact-info-item"><span class="contact-icon">✉️</span><span><a href="mailto:info@mattandjeffs.com">info@mattandjeffs.com</a></span></div>
+          <div class="contact-info-item"><span class="contact-icon">🕐</span><span>Car Wash: Daily · Gas: 24 Hours</span></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane" /></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" /></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="jane@email.com" /></div>
+        <div class="form-group">
+          <label>Reason for Contact</label>
+          <select>
+            <option value="">Select...</option>
+            <option>Wash Services</option>
+            <option>Detailing Appointment</option>
+            <option>Unlimited Club Membership</option>
+            <option>Gas Discount Card</option>
+            <option>Fundraising Partnership</option>
+            <option>Fleet Services</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="How can we help?"></textarea></div>
+        <button class="form-submit">Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Matt &amp; <span>Jeff's</span></div>
+        <div class="footer-tagline">Car Wash &amp; Detail · Marin County Since 1996</div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Wash Services</a></li>
+          <li><a href="#services">Detailing</a></li>
+          <li><a href="#gas">Gas Station</a></li>
+          <li><a href="#club">Wash Club</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>About</h5>
+        <ul>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#locations">Locations</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>More</h5>
+        <ul>
+          <li><a href="https://www.mattandjeffs.com/online-store" target="_blank">Online Store</a></li>
+          <li><a href="https://www.mattandjeffs.com/gift-shop" target="_blank">Gift Shop</a></li>
+          <li><a href="https://www.mattandjeffs.com/fundraising" target="_blank">Fundraising</a></li>
+          <li><a href="tel:4158999952">(415) 899-9952</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Matt &amp; Jeff's Car Wash &amp; Detail · Novato &amp; San Rafael, CA · info@mattandjeffs.com</p>
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+  </script>
+</body>
+</html>

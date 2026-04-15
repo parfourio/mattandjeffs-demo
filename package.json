@@ -1,0 +1,7 @@
+{
+  "name": "mattandjeffs-demo",
+  "version": "1.0.0",
+  "description": "Matt and Jeff's Car Wash concept demo",
+  "scripts": { "start": "npx serve . -p $PORT" },
+  "dependencies": { "serve": "^14.2.1" }
+}
